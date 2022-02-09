@@ -5,14 +5,16 @@ var repoSearchTerm = document.querySelector("#repo-search-term");
 var languageButtonsEl = document.querySelector("#language-buttons");
 
 var getFeaturedRepos = function (language) {
+  //console.log(language);
   var apiUrl =
     "https://api.github.com/search/repositories?q=" +
     language +
     "+is:featured&sort=help-wanted-issues";
-
+  //console.log(apiUrl);
   fetch(apiUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
+        //console.log(data);
         displayRepos(data.items, language);
       });
     } else {
@@ -31,6 +33,7 @@ var getUserRepos = function (user) {
       // request was successful
       if (response.ok) {
         response.json().then(function (data) {
+          //console.log(data);
           displayRepos(data, user);
         });
       } else {
@@ -44,6 +47,8 @@ var getUserRepos = function (user) {
 };
 
 var displayRepos = function (repos, searchTerm) {
+  //console.log(repos);
+  //console.log(searchTerm);
   // check if api returned any repos
   if (repos.length === 0) {
     repoContainerEl.textContent = "No repositories found.";
@@ -103,7 +108,7 @@ var formSubmitHandler = function (event) {
     getUserRepos(username);
     nameInputEl.value = "";
   } else {
-    alert("Please enter a GitHub username");
+    alert("Please enter a GitHub username.");
   }
 };
 

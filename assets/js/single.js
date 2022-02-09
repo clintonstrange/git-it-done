@@ -3,6 +3,9 @@ var limitWarningEl = document.querySelector("#limit-warning");
 var repoNameEl = document.querySelector("#repo-name");
 
 var getRepoName = function () {
+  // console.log(document);
+  // console.log(document.location);
+  // console.log(document.location.search);
   // grab repo name from url query string
   var queryString = document.location.search;
   var repoName = queryString.split("=")[1];
@@ -19,8 +22,10 @@ var getRepoName = function () {
 };
 
 var getRepoIssues = function (repo) {
+  //console.log(repo);
   var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
 
+  //console.log(apiUrl);
   // make a get request to url
   fetch(apiUrl).then(function (response) {
     // request was successful
@@ -41,6 +46,7 @@ var getRepoIssues = function (repo) {
 };
 
 var displayIssues = function (issues) {
+  //console.log(issues);
   if (issues.length === 0) {
     issueContainerEl.textContent = "This repo has no open issues!";
     return;
@@ -83,7 +89,7 @@ var displayWarning = function (repo) {
 
   var linkEl = document.createElement("a");
   linkEl.textContent = "See More Issues on GitHub.com";
-  linkEl.setAttribute("href", "https://github/com/" + repo + "/issues");
+  linkEl.setAttribute("href", "https://github.com/" + repo + "/issues");
   linkEl.setAttribute("target", "_blank");
 
   // append to warning container
